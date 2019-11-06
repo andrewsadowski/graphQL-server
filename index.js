@@ -10,11 +10,13 @@ app.use(cors())
 const schema = buildASTSchema(gql`
   type Query {
     hello: String
+    add: String
   }
 `)
 
 const rootValue = {
-  hello: () => 'Hello, world'
+  hello: () => 'Hello.',
+  add: () => 'You dirty, motherfucker'
 }
 
 app.use('/graphql', graphqlHTTP({ schema, rootValue }))
