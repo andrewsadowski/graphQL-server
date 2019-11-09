@@ -2,24 +2,12 @@ const express = require('express')
 const cors = require('cors')
 const graphqlHTTP = require('express-graphql')
 const gql = require('graphql-tag')
-const { buildASTSchema } = require('graphql')
+// const { buildASTSchema } = require('graphql')
 const uuid = require('uuid/v4')
-
+const {schema} = require('./schema')
 
 const app = express()
 app.use(cors())
-
-const schema = buildASTSchema(gql`
-  type Query {
-    hello: String
-    add: String
-  }
-`)
-
-const rootValue = {
-  hello: () => 'Hello.',
-  add: () => 'You dirty, motherfucker'
-}
 
 app.use('/graphql', graphqlHTTP({ schema, rootValue }))
 
