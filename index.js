@@ -28,10 +28,12 @@ const resolvers = {
 
 const query = `
 query myFirstQuery {
-  id
-  title
-  duration
-  watched
+  video {
+    id
+    title
+    duration
+    watched
+  }
 }`;
 
 graphql(schema, query, resolvers)
