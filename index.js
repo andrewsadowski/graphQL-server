@@ -9,6 +9,7 @@ const {
 } = require("graphql");
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
+const { getVideoById } = require("./data");
 
 const PORT = process.env.PORT || 3000;
 const server = express();
@@ -48,37 +49,15 @@ const queryType = new GraphQLObjectType({
           description: "The id of the video"
         }
       },
-      resolve: () =>
-        new Promise(resolve => {
-          resolve({
-            id: "a",
-            title: "GraphQL",
-            duration: 180,
-            watched: false
-          });
-        })
+      resolve: (_, args) => {
+        return getVideoById(args.id);
+      }
     }
   }
 });
 const schema = new GraphQLSchema({
   query: queryType
 });
-
-const videoA = {
-  id: "a",
-  title: "Murdered by Words",
-  duration: 144,
-  watched: false
-};
-
-const videoB = {
-  id: "b",
-  title: "Murdered by Knives",
-  duration: 132,
-  watched: true
-};
-
-const videos = [videoA, videoB];
 
 server.use(
   "/graphql",
