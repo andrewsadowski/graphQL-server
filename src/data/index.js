@@ -13,6 +13,7 @@ const videoB = {
 };
 
 const videos = [videoA, videoB];
+
 const getVideoById = id =>
   new Promise(resolve => {
     const [video] = videos.filter(video => {

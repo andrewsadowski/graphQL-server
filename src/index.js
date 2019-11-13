@@ -55,6 +55,7 @@ const queryType = new GraphQLObjectType({
     }
   }
 });
+
 const schema = new GraphQLSchema({
   query: queryType
 });
